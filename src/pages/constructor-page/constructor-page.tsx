@@ -1,5 +1,5 @@
 import styles from './constructor-page.module.css';
-import { useSelector } from '../../services/store';
+import { useSelector } from '@store';
 import { BurgerIngredients } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
