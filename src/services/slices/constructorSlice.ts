@@ -88,7 +88,7 @@ const constructorSlice = createSlice({
       })
       .addCase(burgerOrder.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload as string;
+        state.error = action.error as string;
         state.orderRequest = false;
       })
       .addCase(burgerOrder.fulfilled, (state, action) => {

@@ -76,7 +76,7 @@ const userSlice = createSlice({
         state.isAuth = false;
       })
       .addCase(getUser.rejected, (state, action) => {
-        state.error = action.error.message as string;
+        state.error = action.error as string;
         state.isLoading = false;
         state.isAuth = false;
       })
@@ -91,7 +91,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.error = action.error.message as string;
+        state.error = action.error as string;
         state.isLoading = false;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -107,7 +107,7 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.error = action.error.message as string;
+        state.error = action.error as string;
         state.isLoading = false;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
@@ -122,7 +122,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(forgotPassword.rejected, (state, action) => {
-        state.error = action.error.message as string;
+        state.error = action.error as string;
         state.isLoading = false;
       })
       .addCase(forgotPassword.fulfilled, (state, action) => {
@@ -161,7 +161,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.error.message as string;
+        state.error = action.error as string;
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
         state.isAuth = false;
