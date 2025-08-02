@@ -1,7 +1,6 @@
 import { TConstructorIngredient } from '@utils-types';
-import reducer, { burgerOrder } from './constructorSlice';
+import reducer, { burgerOrder, initialState } from './constructorSlice';
 import { addItem, deleteItem } from './constructorSlice';
-import { constructorState } from './constructorSlice';
 
 const mockBurgerConstructor = {
   success: true,
@@ -53,19 +52,8 @@ const testIngredient: TConstructorIngredient = {
 };
 
 describe('constructorSlice reducer tests', () => {
-  let initialState: constructorState;
-
   beforeEach(() => {
-    initialState = {
-      constructorItems: {
-        bun: null,
-        ingredients: []
-      },
-      isLoading: false,
-      orderRequest: false,
-      orderModalData: null,
-      error: null
-    };
+    initialState;
   });
 
   describe('addItem action', () => {

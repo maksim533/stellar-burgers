@@ -2,14 +2,14 @@ import { getOrderByNumberApi, getOrdersApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
-export interface orderState {
+export interface OrderState {
   error: null | string;
   isLoading: boolean;
   orders: TOrder[];
   order: TOrder | null;
 }
 
-const initialState: orderState = {
+export const initialState: OrderState = {
   error: null,
   isLoading: false,
   orders: [],

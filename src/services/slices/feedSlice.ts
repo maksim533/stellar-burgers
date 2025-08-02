@@ -2,7 +2,7 @@ import { getFeedsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
 
-export interface feedState {
+export interface FeedState {
   error: null | string;
   isLoading: boolean;
   orderData: {
@@ -12,7 +12,7 @@ export interface feedState {
   };
 }
 
-const initialState: feedState = {
+export const initialState: FeedState = {
   error: null,
   isLoading: false,
   orderData: {

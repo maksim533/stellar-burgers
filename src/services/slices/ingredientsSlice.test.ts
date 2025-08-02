@@ -1,6 +1,5 @@
 import { TIngredient } from '@utils-types';
-import { getIngredients } from './ingredientsSlices';
-import { ingredientsState } from './ingredientsSlices';
+import { getIngredients, initialState } from './ingredientsSlices';
 import ingredientReducer from './ingredientsSlices';
 
 const mockIngredients: TIngredient[] = [
@@ -47,14 +46,8 @@ const mockIngredients: TIngredient[] = [
 ];
 
 describe('ingredient reducer tests', () => {
-  let initialState: ingredientsState;
-
   beforeEach(() => {
-    initialState = {
-      ingredients: [],
-      isLoading: false,
-      error: null
-    };
+    initialState;
   });
 
   describe('async thunk actions', () => {

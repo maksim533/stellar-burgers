@@ -1,13 +1,14 @@
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import userReducer, {
   forgotPassword,
+  initialState,
   loginUser,
   logoutUser,
   registerUser,
   resetPassword,
   updateUser
 } from './userSlice';
-import { getUser, userState } from './userSlice';
+import { getUser } from './userSlice';
 
 jest.mock('../../utils/cookie', () => ({
   setCookie: jest.fn(),
@@ -50,15 +51,8 @@ const mockUserLogin = {
 const mockLogoutUser = { success: true, message: 'Successful logout' };
 
 describe('user reducer tests', () => {
-  let initialState: userState;
   beforeEach(() => {
-    initialState = {
-      isAuth: false,
-      isLoading: false,
-      error: null,
-      user: null,
-      isAuthChecked: false
-    };
+    initialState;
   });
 
   describe('async thunk actions getUser', () => {

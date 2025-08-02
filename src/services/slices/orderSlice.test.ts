@@ -1,5 +1,5 @@
 import { TOrdersData } from '@utils-types';
-import { getOrderByNumber, getOrders, orderState } from './orderSlice';
+import { getOrderByNumber, getOrders, initialState } from './orderSlice';
 import orderReducer from './orderSlice';
 
 const mockOrder: TOrdersData = {
@@ -44,15 +44,8 @@ const mockOrderByNumber = {
 };
 
 describe('order reducer tests', () => {
-  let initialState: orderState;
-
   beforeEach(() => {
-    initialState = {
-      error: null,
-      isLoading: false,
-      orders: [],
-      order: null
-    };
+    initialState;
   });
 
   describe('async thunk actions getOrders', () => {

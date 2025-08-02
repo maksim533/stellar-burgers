@@ -1,6 +1,5 @@
-import { feedsApi } from './feedSlice';
+import { feedsApi, initialState } from './feedSlice';
 import feedReducer from './feedSlice';
-import { feedState } from './feedSlice';
 
 const mockOrders = {
   success: true,
@@ -39,18 +38,8 @@ const mockOrders = {
 };
 
 describe('feedSlice reducer tests', () => {
-  let initialState: feedState;
-
   beforeEach(() => {
-    initialState = {
-      error: null,
-      isLoading: false,
-      orderData: {
-        orders: [],
-        total: null,
-        totalToday: null
-      }
-    };
+    initialState;
   });
 
   describe('async thunk actions', () => {

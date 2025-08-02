@@ -7,7 +7,7 @@ import {
 } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient, TOrder } from '@utils-types';
 
-export interface constructorState {
+export interface ConstructorState {
   constructorItems: {
     bun: TConstructorIngredient | null;
     ingredients: TConstructorIngredient[];
@@ -18,7 +18,7 @@ export interface constructorState {
   error: null | string;
 }
 
-const initialState: constructorState = {
+export const initialState: ConstructorState = {
   constructorItems: {
     bun: null,
     ingredients: []

@@ -1,3 +1,4 @@
+import { selectors } from '../../support/selectors';
 import { deleteCookie, setCookie } from 'src/utils/cookie';
 
 describe('Конструктор бургера', () => {
@@ -16,7 +17,7 @@ describe('Конструктор бургера', () => {
     cy.intercept('GET', `/api/ingredients`, {
       fixture: 'ingredients.json'
     }).as('getIngredients');
-    cy.visit('http://localhost:4000');
+    cy.visit('');
     cy.wait('@getIngredients');
     cy.wait('@getUser');
   });
@@ -25,7 +26,7 @@ describe('Конструктор бургера', () => {
     localStorage.removeItem('refreshToken');
   });
   it('Проверка добавление ингредиентов в конструктор', () => {
-    cy.get('[data-test="constructor"]').as('constructor');
+    cy.get(selectors.constructor).as('constructor');
     cy.get('[data-test="Булки"]').children().first().children('button').click();
     cy.get('[data-test="Начинки"]')
       .children()
@@ -42,26 +43,28 @@ describe('Конструктор бургера', () => {
   });
 
   it('Проверка открытия и закрытия модального окна', () => {
-    cy.get('[data-test="constructor-ingredient"]').first().click();
-    cy.get('[data-test="modal"]').should('be.visible');
+    cy.get(selectors.constructorIngredient).first().click();
+    cy.get(selectors.modal).as('modal');
+    cy.get('@modal').should('be.visible');
 
-    cy.get('[data-test="modal-close"]').click();
-    cy.get('[data-test="modal"]').should('not.exist');
+    cy.get(selectors.modalClose).click();
+    cy.get('@modal').should('not.exist');
   });
 
   it('Проверка закрытия модального окна по клику оверлея', () => {
-    cy.get('[data-test="constructor-ingredient"]').first().click();
-    cy.get('[data-test="modal"]').should('be.visible');
+    cy.get(selectors.constructorIngredient).first().click();
+    cy.get('@modal').should('be.visible');
 
-    cy.get('[data-test="modal-overlay"]').click({ force: true });
-    cy.get('[data-test="modal"]').should('not.exist');
+    cy.get(selectors.modalOverlay).click({ force: true });
+    cy.get('@modal').should('not.exist');
   });
 
   it('Проверка составления заказа и отправка его на сервер', () => {
     cy.intercept('POST', `/api/orders`, {
       fixture: 'order.json'
     }).as('postOrder');
-    cy.get('[data-test="constructor"]').as('constructor');
+    cy.get(selectors.constructor).as('constructor');
+    cy.get(selectors.modal).as('modal');
     cy.get('[data-test="Булки"]').children().first().children('button').click();
     cy.get('[data-test="Начинки"]')
       .children()
@@ -77,10 +80,10 @@ describe('Конструктор бургера', () => {
     cy.get('@constructor').should('contain', 'Соус Spicy-X');
 
     cy.get('@constructor').contains('Оформить заказ').click();
-    cy.get('[data-test="modal"]').should('be.visible');
-    cy.get('[data-test="modal"]').should('contain', '85386');
-    cy.get('[data-test="modal-close"]').click();
-    cy.get('[data-test="modal"]').should('not.exist');
+    cy.get('@modal').should('be.visible');
+    cy.get('@modal').should('contain', '85386');
+    cy.get(selectors.modalClose).click();
+    cy.get('@modal').should('not.exist');
     cy.get('@constructor').should('not.contain', 'Краторная булка N-200i');
     cy.get('@constructor').should(
       'not.contain',
