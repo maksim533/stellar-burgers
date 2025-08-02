@@ -9,7 +9,7 @@ export interface OrderState {
   order: TOrder | null;
 }
 
-export const initialState: OrderState = {
+export const initialStateOrder: OrderState = {
   error: null,
   isLoading: false,
   orders: [],
@@ -25,7 +25,7 @@ export const getOrderByNumber = createAsyncThunk(
 
 const orderSlice = createSlice({
   name: 'order',
-  initialState,
+  initialState: initialStateOrder,
   reducers: {},
   selectors: {
     selectOrder: (state) => state

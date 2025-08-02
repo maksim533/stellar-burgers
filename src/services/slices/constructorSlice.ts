@@ -18,7 +18,7 @@ export interface ConstructorState {
   error: null | string;
 }
 
-export const initialState: ConstructorState = {
+export const initialStateConstructor: ConstructorState = {
   constructorItems: {
     bun: null,
     ingredients: []
@@ -36,7 +36,7 @@ export const burgerOrder = createAsyncThunk(
 
 const constructorSlice = createSlice({
   name: 'constructorItem',
-  initialState,
+  initialState: initialStateConstructor,
   reducers: {
     addItem: {
       reducer: (state, action: PayloadAction<TConstructorIngredient>) => {

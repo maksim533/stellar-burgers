@@ -1,7 +1,7 @@
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import userReducer, {
   forgotPassword,
-  initialState,
+  initialStateUser,
   loginUser,
   logoutUser,
   registerUser,
@@ -52,12 +52,12 @@ const mockLogoutUser = { success: true, message: 'Successful logout' };
 
 describe('user reducer tests', () => {
   beforeEach(() => {
-    initialState;
+    initialStateUser;
   });
 
   describe('async thunk actions getUser', () => {
     test('pending action ', () => {
-      const result = userReducer(initialState, getUser.pending(''));
+      const result = userReducer(initialStateUser, getUser.pending(''));
       expect(result.isLoading).toBe(true);
       expect(result.isAuth).toBe(false);
       expect(result.error).toBeNull();
@@ -65,7 +65,7 @@ describe('user reducer tests', () => {
     test('rejected action', () => {
       const errorMessage = new Error('Network error');
       const result = userReducer(
-        initialState,
+        initialStateUser,
         getUser.rejected(errorMessage, '')
       );
       expect(result.isLoading).toBe(false);
@@ -77,7 +77,10 @@ describe('user reducer tests', () => {
       });
     });
     test('fulfilled action', () => {
-      const result = userReducer(initialState, getUser.fulfilled(mockUser, ''));
+      const result = userReducer(
+        initialStateUser,
+        getUser.fulfilled(mockUser, '')
+      );
       expect(result.isLoading).toBe(false);
       expect(result.error).toBeNull();
       expect(result.isAuth).toBe(true);
@@ -86,7 +89,7 @@ describe('user reducer tests', () => {
     describe('async thunk actions loginUser', () => {
       test('pending action ', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           loginUser.pending('', {
             email: 'ivan@mail.ru',
             password: '12345678'
@@ -98,7 +101,7 @@ describe('user reducer tests', () => {
       test('rejected action', () => {
         const errorMessage = new Error('Network error');
         const result = userReducer(
-          initialState,
+          initialStateUser,
           loginUser.rejected(errorMessage, '', {
             email: 'ivan@mail.ru',
             password: '12345678'
@@ -113,7 +116,7 @@ describe('user reducer tests', () => {
       });
       test('fulfilled action', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           loginUser.fulfilled(mockUserLogin, '', {
             email: 'ivan@mail.ru',
             password: '12345678'
@@ -136,7 +139,7 @@ describe('user reducer tests', () => {
     describe('async thunk actions registerUser', () => {
       test('pending action ', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           registerUser.pending('', {
             email: 'ivan@mail.ru',
             password: '12345678',
@@ -149,7 +152,7 @@ describe('user reducer tests', () => {
       test('rejected action', () => {
         const errorMessage = new Error('Network error');
         const result = userReducer(
-          initialState,
+          initialStateUser,
           registerUser.rejected(errorMessage, '', {
             email: 'ivan@mail.ru',
             password: '12345678',
@@ -165,7 +168,7 @@ describe('user reducer tests', () => {
       });
       test('fulfilled action', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           registerUser.fulfilled(mockUserLogin, '', {
             email: 'ivan@mail.ru',
             password: '12345678',
@@ -188,7 +191,7 @@ describe('user reducer tests', () => {
     describe('async thunk actions forgotPassword', () => {
       test('pending action ', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           forgotPassword.pending('', {
             email: 'ivan@mail.ru'
           })
@@ -199,7 +202,7 @@ describe('user reducer tests', () => {
       test('rejected action', () => {
         const errorMessage = new Error('Network error');
         const result = userReducer(
-          initialState,
+          initialStateUser,
           forgotPassword.rejected(errorMessage, '', {
             email: 'ivan@mail.ru'
           })
@@ -213,7 +216,7 @@ describe('user reducer tests', () => {
       });
       test('fulfilled action', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           forgotPassword.fulfilled(mockUserLogin, '', {
             email: 'ivan@mail.ru'
           })
@@ -225,7 +228,7 @@ describe('user reducer tests', () => {
     describe('async thunk actions resetPassword', () => {
       test('pending action ', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           resetPassword.pending('', {
             password: '12345678',
             token: '12345'
@@ -237,7 +240,7 @@ describe('user reducer tests', () => {
       test('rejected action', () => {
         const errorMessage = new Error('Network error');
         const result = userReducer(
-          initialState,
+          initialStateUser,
           resetPassword.rejected(errorMessage, '', {
             password: '12345678',
             token: '12345'
@@ -252,7 +255,7 @@ describe('user reducer tests', () => {
       });
       test('fulfilled action', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           resetPassword.fulfilled(mockUserLogin, '', {
             password: '12345678',
             token: '12345'
@@ -265,7 +268,7 @@ describe('user reducer tests', () => {
     describe('async thunk actions updateUser', () => {
       test('pending action ', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           updateUser.pending('', {
             password: '12345678'
           })
@@ -276,7 +279,7 @@ describe('user reducer tests', () => {
       test('rejected action', () => {
         const errorMessage = new Error('Network error');
         const result = userReducer(
-          initialState,
+          initialStateUser,
           updateUser.rejected(errorMessage, '', {
             password: '12345678'
           })
@@ -290,7 +293,7 @@ describe('user reducer tests', () => {
       });
       test('fulfilled action', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           updateUser.fulfilled(mockUserLogin, '', {
             password: '12345678'
           })
@@ -303,14 +306,14 @@ describe('user reducer tests', () => {
     });
     describe('async thunk actions logoutUser', () => {
       test('pending action ', () => {
-        const result = userReducer(initialState, logoutUser.pending(''));
+        const result = userReducer(initialStateUser, logoutUser.pending(''));
         expect(result.isLoading).toBe(true);
         expect(result.error).toBeNull();
       });
       test('rejected action', () => {
         const errorMessage = new Error('Network error');
         const result = userReducer(
-          initialState,
+          initialStateUser,
           logoutUser.rejected(errorMessage, '')
         );
         expect(result.isLoading).toBe(false);
@@ -322,7 +325,7 @@ describe('user reducer tests', () => {
       });
       test('fulfilled action', () => {
         const result = userReducer(
-          initialState,
+          initialStateUser,
           logoutUser.fulfilled(mockLogoutUser, '')
         );
         deleteCookie('accessToken');

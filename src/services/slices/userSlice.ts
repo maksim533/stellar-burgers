@@ -21,7 +21,7 @@ export interface UserState {
   user: null | TUser;
 }
 
-export const initialState: UserState = {
+export const initialStateUser: UserState = {
   isAuth: false,
   isLoading: false,
   error: null,
@@ -59,7 +59,7 @@ export const logoutUser = createAsyncThunk('user/logout', logoutApi);
 
 const userSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState: initialStateUser,
   reducers: {
     authChecked: (state) => {
       state.isAuthChecked = true;

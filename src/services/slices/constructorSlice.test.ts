@@ -1,5 +1,8 @@
 import { TConstructorIngredient } from '@utils-types';
-import reducer, { burgerOrder, initialState } from './constructorSlice';
+import reducer, {
+  burgerOrder,
+  initialStateConstructor
+} from './constructorSlice';
 import { addItem, deleteItem } from './constructorSlice';
 
 const mockBurgerConstructor = {
@@ -53,12 +56,12 @@ const testIngredient: TConstructorIngredient = {
 
 describe('constructorSlice reducer tests', () => {
   beforeEach(() => {
-    initialState;
+    initialStateConstructor;
   });
 
   describe('addItem action', () => {
     test('добавляет булочку в конструктор', () => {
-      const result = reducer(initialState, addItem(testBun));
+      const result = reducer(initialStateConstructor, addItem(testBun));
       expect(result.constructorItems.bun).toMatchObject({
         ...testBun,
         type: 'bun',
@@ -68,7 +71,7 @@ describe('constructorSlice reducer tests', () => {
     });
 
     test('добавляет ингредиент в список ингредиентов', () => {
-      const result = reducer(initialState, addItem(testIngredient));
+      const result = reducer(initialStateConstructor, addItem(testIngredient));
       expect(result.constructorItems.bun).toBeNull();
       expect(result.constructorItems.ingredients).toMatchObject([
         {
@@ -83,7 +86,7 @@ describe('constructorSlice reducer tests', () => {
   describe('deleteItem action', () => {
     test('удаляет существующий ингредиент', () => {
       const stateWithIngredient = {
-        ...initialState,
+        ...initialStateConstructor,
         constructorItems: {
           bun: null,
           ingredients: [testIngredient]
@@ -98,14 +101,17 @@ describe('constructorSlice reducer tests', () => {
     });
 
     test('ничего не делает при удалении несуществующего ингредиента', () => {
-      const result = reducer(initialState, deleteItem('несуществующий-id'));
+      const result = reducer(
+        initialStateConstructor,
+        deleteItem('несуществующий-id')
+      );
       expect(result.constructorItems.ingredients).toEqual([]);
     });
 
     describe('async thunk actions', () => {
       test('pending action', () => {
         const result = reducer(
-          initialState,
+          initialStateConstructor,
           burgerOrder.pending('', [
             '643d69a5c3f7b9001cfa093d',
             '643d69a5c3f7b9001cfa093e',
@@ -119,7 +125,7 @@ describe('constructorSlice reducer tests', () => {
       test('rejected action', () => {
         const errorMessage = new Error('Network error');
         const result = reducer(
-          initialState,
+          initialStateConstructor,
           burgerOrder.rejected(errorMessage, '', [
             '643d69a5c3f7b9001cfa093d',
             '643d69a5c3f7b9001cfa093e',
@@ -136,7 +142,7 @@ describe('constructorSlice reducer tests', () => {
 
       test('fulfilled action', () => {
         const result = reducer(
-          initialState,
+          initialStateConstructor,
           burgerOrder.fulfilled(mockBurgerConstructor, '', [])
         );
         expect(result.isLoading).toBe(false);

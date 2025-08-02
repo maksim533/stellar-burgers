@@ -8,7 +8,7 @@ export interface IngredientsState {
   error: null | string;
 }
 
-export const initialState: IngredientsState = {
+export const initialStateIngredients: IngredientsState = {
   ingredients: [],
   isLoading: false,
   error: null
@@ -21,7 +21,7 @@ export const getIngredients = createAsyncThunk(
 
 const ingredientsSlice = createSlice({
   name: 'ingredient',
-  initialState,
+  initialState: initialStateIngredients,
   reducers: {},
   selectors: {
     selectIngredientState: (state) => state,

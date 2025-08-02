@@ -12,7 +12,7 @@ export interface FeedState {
   };
 }
 
-export const initialState: FeedState = {
+export const initialStateFeed: FeedState = {
   error: null,
   isLoading: false,
   orderData: {
@@ -26,7 +26,7 @@ export const feedsApi = createAsyncThunk('feeds/get/all', getFeedsApi);
 
 const feedSlice = createSlice({
   name: 'feeds',
-  initialState,
+  initialState: initialStateFeed,
   reducers: {},
   selectors: {
     selectedFeed: (state) => state

@@ -1,5 +1,5 @@
 import { TOrdersData } from '@utils-types';
-import { getOrderByNumber, getOrders, initialState } from './orderSlice';
+import { getOrderByNumber, getOrders, initialStateOrder } from './orderSlice';
 import orderReducer from './orderSlice';
 
 const mockOrder: TOrdersData = {
@@ -45,19 +45,19 @@ const mockOrderByNumber = {
 
 describe('order reducer tests', () => {
   beforeEach(() => {
-    initialState;
+    initialStateOrder;
   });
 
   describe('async thunk actions getOrders', () => {
     test('pending action ', () => {
-      const result = orderReducer(initialState, getOrders.pending(''));
+      const result = orderReducer(initialStateOrder, getOrders.pending(''));
       expect(result.isLoading).toBe(true);
       expect(result.error).toBeNull();
     });
     test('rejected action', () => {
       const errorMessage = new Error('Network error');
       const result = orderReducer(
-        initialState,
+        initialStateOrder,
         getOrders.rejected(errorMessage, '')
       );
       expect(result.isLoading).toBe(false);
@@ -69,7 +69,7 @@ describe('order reducer tests', () => {
     });
     test('fulfilled action', () => {
       const result = orderReducer(
-        initialState,
+        initialStateOrder,
         getOrders.fulfilled(mockOrder.orders, '')
       );
       expect(result.isLoading).toBe(false);
@@ -79,7 +79,7 @@ describe('order reducer tests', () => {
     describe('async thunk actions getOrderByNumber', () => {
       test('pending action ', () => {
         const result = orderReducer(
-          initialState,
+          initialStateOrder,
           getOrderByNumber.pending('', 1)
         );
         expect(result.isLoading).toBe(true);
@@ -88,7 +88,7 @@ describe('order reducer tests', () => {
       test('rejected action', () => {
         const errorMessage = new Error('Network error');
         const result = orderReducer(
-          initialState,
+          initialStateOrder,
           getOrderByNumber.rejected(errorMessage, '', 1)
         );
         expect(result.isLoading).toBe(false);
@@ -100,7 +100,7 @@ describe('order reducer tests', () => {
       });
       test('fulfilled action', () => {
         const result = orderReducer(
-          initialState,
+          initialStateOrder,
           getOrderByNumber.fulfilled(mockOrderByNumber, '', 1)
         );
         expect(result.isLoading).toBe(false);

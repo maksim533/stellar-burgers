@@ -1,4 +1,4 @@
-import { feedsApi, initialState } from './feedSlice';
+import { feedsApi, initialStateFeed } from './feedSlice';
 import feedReducer from './feedSlice';
 
 const mockOrders = {
@@ -39,12 +39,12 @@ const mockOrders = {
 
 describe('feedSlice reducer tests', () => {
   beforeEach(() => {
-    initialState;
+    initialStateFeed;
   });
 
   describe('async thunk actions', () => {
     test('pending action', () => {
-      const result = feedReducer(initialState, feedsApi.pending(''));
+      const result = feedReducer(initialStateFeed, feedsApi.pending(''));
       expect(result.isLoading).toBe(true);
       expect(result.error).toBeNull();
     });
@@ -52,7 +52,7 @@ describe('feedSlice reducer tests', () => {
     test('rejected action', () => {
       const errorMessage = new Error('Network error');
       const result = feedReducer(
-        initialState,
+        initialStateFeed,
         feedsApi.rejected(errorMessage, '')
       );
       expect(result.isLoading).toBe(false);
@@ -65,7 +65,7 @@ describe('feedSlice reducer tests', () => {
 
     test('fulfilled action', () => {
       const result = feedReducer(
-        initialState,
+        initialStateFeed,
         feedsApi.fulfilled(mockOrders, '')
       );
       expect(result.isLoading).toBe(false);

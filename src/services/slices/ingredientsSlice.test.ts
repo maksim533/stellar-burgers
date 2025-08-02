@@ -1,5 +1,5 @@
 import { TIngredient } from '@utils-types';
-import { getIngredients, initialState } from './ingredientsSlices';
+import { getIngredients, initialStateIngredients } from './ingredientsSlices';
 import ingredientReducer from './ingredientsSlices';
 
 const mockIngredients: TIngredient[] = [
@@ -47,13 +47,13 @@ const mockIngredients: TIngredient[] = [
 
 describe('ingredient reducer tests', () => {
   beforeEach(() => {
-    initialState;
+    initialStateIngredients;
   });
 
   describe('async thunk actions', () => {
     test('pending action', () => {
       const result = ingredientReducer(
-        initialState,
+        initialStateIngredients,
         getIngredients.pending('')
       );
       expect(result.isLoading).toBe(true);
@@ -62,7 +62,7 @@ describe('ingredient reducer tests', () => {
     test('rejected action', () => {
       const errorMessage = new Error('Network error');
       const result = ingredientReducer(
-        initialState,
+        initialStateIngredients,
         getIngredients.rejected(errorMessage, '')
       );
       expect(result.isLoading).toBe(false);
@@ -74,7 +74,7 @@ describe('ingredient reducer tests', () => {
     });
     test('fulfilled action', () => {
       const result = ingredientReducer(
-        initialState,
+        initialStateIngredients,
         getIngredients.fulfilled(mockIngredients, '')
       );
       expect(result.isLoading).toBe(false);

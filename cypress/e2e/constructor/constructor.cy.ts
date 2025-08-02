@@ -53,6 +53,7 @@ describe('Конструктор бургера', () => {
 
   it('Проверка закрытия модального окна по клику оверлея', () => {
     cy.get(selectors.constructorIngredient).first().click();
+    cy.get(selectors.modal).as('modal');
     cy.get('@modal').should('be.visible');
 
     cy.get(selectors.modalOverlay).click({ force: true });
@@ -64,7 +65,6 @@ describe('Конструктор бургера', () => {
       fixture: 'order.json'
     }).as('postOrder');
     cy.get(selectors.constructor).as('constructor');
-    cy.get(selectors.modal).as('modal');
     cy.get('[data-test="Булки"]').children().first().children('button').click();
     cy.get('[data-test="Начинки"]')
       .children()
@@ -80,6 +80,7 @@ describe('Конструктор бургера', () => {
     cy.get('@constructor').should('contain', 'Соус Spicy-X');
 
     cy.get('@constructor').contains('Оформить заказ').click();
+    cy.get(selectors.modal).as('modal');
     cy.get('@modal').should('be.visible');
     cy.get('@modal').should('contain', '85386');
     cy.get(selectors.modalClose).click();
