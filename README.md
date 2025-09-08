@@ -5,6 +5,8 @@
 [![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.0.1-purple.svg)](https://redux-toolkit.js.org/)
 [![Webpack](https://img.shields.io/badge/Webpack-5.89.0-orange.svg)](https://webpack.js.org/)
 
+![Фото проекта](./src/images/project-image.png)
+
 ## 📋 Описание проекта
 
 **Stellar Burgers** - это интерактивное веб-приложение для конструирования космических бургеров. Проект представляет собой современное React-приложение с полнофункциональным интерфейсом для создания уникальных бургеров из различных ингредиентов, системой заказов и личным кабинетом пользователя.
@@ -184,6 +186,9 @@ npm run cypress:open
 ```bash
 npm run storybook
 ```
+
+## 🧩 Деплой
+GitHub Pages: https://maksim533.github.io/stellar-burgers/
 
 ## 🔐 Аутентификация
 

@@ -84,7 +84,9 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    filename: 'js/bundle.[contenthash:8].js',
+    clean: true,
+    publicPath: '/stellar-burgers/', 
   },
   devServer: {
     static: path.join(__dirname, './dist'),
